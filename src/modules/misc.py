@@ -6,8 +6,9 @@ class Greeter(Static):
     """A widget for greeting"""
 
     def compose(self) -> ComposeResult:
+        yield Static("GALILEO COMPUTE SYSTEM\n", classes="clocklabel")
         yield Digits("", id="clock")
-        yield Static("\nGALILEO SYSTEM WELCOMES YOU ^_^\nPRESS L TO UNLOCK", id="clocklabel")
+        yield Static("\nGALILEO SYSTEM WELCOMES YOU ^_^ PRESS L TO UNLOCK", classes="clocklabel")
 
     def on_mount(self) -> None:
         self.update_clock()

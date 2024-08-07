@@ -26,6 +26,6 @@ Greeter {
     text-align: center;
 }
 
-#clocklabel {
+.clocklabel {
     text-align: center;
 }
