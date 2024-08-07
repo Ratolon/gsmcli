@@ -6,16 +6,26 @@ GsmCliApp {
     align: center middle;
 }
 
+Horizontal {
+    align: center middle;
+}
+
 Greeter {
-    width: auto;
-    height: 10;
+    align: center middle;
+    text-align: center;
+    width: 60%;
+    height: 50%;
     padding: 1 2;
     background: $panel;
     color: $text;
     border: $secondary tall;
-    content-align: center middle;
 }
 
 #clock {
-    width: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#clocklabel {
+    text-align: center;
 }

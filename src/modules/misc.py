@@ -7,7 +7,7 @@ class Greeter(Static):
 
     def compose(self) -> ComposeResult:
         yield Digits("", id="clock")
-        yield Label("GALILEO SYSTEM WELCOMES YOU ^_^\nPRESS L TO UNLOCK")
+        yield Static("\nGALILEO SYSTEM WELCOMES YOU ^_^\nPRESS L TO UNLOCK", id="clocklabel")
 
     def on_mount(self) -> None:
         self.update_clock()
