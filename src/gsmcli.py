@@ -1,5 +1,5 @@
 from textual.app import App, ComposeResult, RenderResult
-from textual.containers import ScrollableContainer, Horizontal, Vertical
+from textual.containers import ScrollableContainer, Horizontal, HorizontalScroll, Vertical
 from textual.widgets import Header, Footer, Static, Digits, Label
 from textual.widget import Widget
 from datetime import datetime
@@ -13,11 +13,13 @@ class GsmCliApp(App):
                 ("d", "toggle_dark", "Toggle dark mode"),
                 ("l", "toggle_lockscreen", "Toggle lockscreen")
                 ]
+    
+    locked = True
 
     def compose(self) -> ComposeResult:
-        yield Header()
-        yield Horizontal(Greeter())
-        yield Footer()
+        yield Header(id="header")
+        yield Horizontal(Greeter(), id="mainbox")
+        yield Footer(id="footer")
 
     def action_toggle_dark(self) -> None:
         """An action to toggle dark colours"""
@@ -25,7 +27,9 @@ class GsmCliApp(App):
     
     def action_toggle_lockscreen(self) -> None:
         """An action to toggle the lockscreen"""
-        pass
+        greeter = self.query(Greeter)
+        greeter.set_class(self.locked, "hidden")
+        self.locked = not self.locked
 
     def action_quit_app(self) -> None:
         """An action to exit the application altogether"""

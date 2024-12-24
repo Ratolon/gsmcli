@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+# Galileo System Manager CLI tools launcher
+# Mikel Iceta 2024
+
+import os
+import sys
+
+from os.path import dirname, abspath, join, basename
+from pathlib import Path
+
+# Check for Textual installation
+try:
+    import textual
+except ImportError:
+    print("Textual is not found in the current environment. Please execute 'pip3 install textual'" )
+    sys.exit(-1)
+
+# Set GSMCLI environment variables
+gsmcliHome = dirname(abspath(__file__))
+os.environ["GSMCLI_HOME"] = gsmcliHome
+
+# Look for config files
+userHomePath = str(Path('~').expanduser())
+userConfigFile = join(userHomePath, '.config/gsmcli.conf')
+globalConfigFile = join(gsmcliHome, "gsmcli.conf")
+selectedConfigFile = ""
+if os.path.exists(userConfigFile):
+    selectedConfigFile = userConfigFile
+elif os.path.exists(globalConfigFile):
+    selectedConfigFile = globalConfigFile
+else:
+    print("No config file was found. Please check the existence of gsmcli.conf in %s", gsmcliHome)
+    sys.exit(-1)
+
+# Launch GSMCLI
+cmd = "python3 "
+cmd += join(gsmcliHome, "src/gsmcli.py")
+cmd += " --config " + selectedConfigFile
+
+# Catch the end of the execution loop
+exit(os.WEXITSTATUS(os.system(cmd)))
